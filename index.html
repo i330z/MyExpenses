@@ -73,62 +73,85 @@
   </div>
 
   <!-- EXPENSE TABLE FORM -->
-  <div class="container ">
-      <div class="user-name" style="text-align:center;">
-          
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="col s3" style="background: white; height:100%">
+          <p class="user-name" style="text-align:center;"></p>
       </div>
-        <!-- <h1 class="display-2">
-            <i class="fas fa-book-open"></i>
-            My<span >Expenses</span>List
-        </h1> -->
-    <form id="expense-form" class="logged-in">
-        <div class="row">
-            <form class="col">
+      <div class="col s9" style="padding: 40px;">
+          <form id="expense-form" class="logged-in">
               <div class="row">
-                <div class="input-field col m3">
-                  <input id="food" type="number" class="validate">
-                  <label for="food">Food</label>
+                  <form class="col">
+                    <div class="row">
+                      <div class="input-field col m3">
+                        <input id="food" type="number" class="validate">
+                        <label for="food">Food</label>
+                      </div>
+                      <div class="input-field col m3">
+                        <input id="transport" type="number" class="validate">
+                        <label for="transport">Transport</label>
+                      </div>
+                      <div class="input-field col m3">
+                          <input id="other" type="number" class="validate">
+                          <label for="other">Other</label>
+                      </div>
+                      <div class="col m3 center-align" style="margin-top: 20px;">
+                          <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-                <div class="input-field col m3">
-                  <input id="transport" type="number" class="validate">
-                  <label for="transport">Transport</label>
-                </div>
-                <div class="input-field col m3">
-                    <input id="other" type="number" class="validate">
-                    <label for="other">Transport</label>
-                </div>
-                <div class="col m3 center-align" style="margin-top: 20px;">
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
-                </div>
+          </form>
+
+         <!-- UPDATE FORM -->
+
+          <form id="update-form" style="display:none;">
+            <div class="row">
+                <form class="col">
+                  <div class="row">
+                    <div class="input-field col m3">
+                      <input id="food" type="number" class="validate">
+                      <label for="food">Food</label>
+                    </div>
+                    <div class="input-field col m3">
+                      <input id="transport" type="number" class="validate">
+                      <label for="transport">Transport</label>
+                    </div>
+                    <div class="input-field col m3">
+                        <input id="other" type="number" class="validate">
+                        <label for="other">Other</label>
+                    </div>
+                    <div class="col m3 center-align" style="margin-top: 20px;">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Update</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
-    </form>
-
-    <table class="table centered stripped">
-        <thead>
-            <tr>
-                <th>Serial</th>
-                <th>Date</th>
-                <th>Food</th>
-                <th>Transport</th>
-                <th>Others</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="expense-list"></tbody>
-    </table>
-
-
-
-
-
-
-
-
-
-
+        </form>
+      
+          <table class="table centered stripped">
+              <thead>
+                  <tr>
+                      <th>Serial</th>
+                      <th>Date</th>
+                      <th>Food</th>
+                      <th>Transport</th>
+                      <th>Others</th>
+                      <th>Total</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody id="expense-list"></tbody>
+          </table>
+      </div>
     </div>
+      
+        
+    
+
+
+
+  </div>
 
 <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-auth.js"></script>

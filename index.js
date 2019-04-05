@@ -2,7 +2,7 @@ const expenseList = document.querySelector('#expense-list');
 const logOutLinks = document.querySelectorAll('.logged-out');
 const logInLinks = document.querySelectorAll('.logged-in');
 const userName = document.querySelector('.user-name');
-
+// const updateForm = document.querySelector('#update-form');
 
 
 //SETUP UI
@@ -10,7 +10,7 @@ const setupUI = (user) =>{
     if(user){
         db.collection('users').doc(user.uid).get().then(doc =>{
             const html = `
-            <div><h4>Oh hi ${doc.data().name} !!</h4></div>
+            <div><h5>Name :  ${doc.data().name}</h5></div>
             `;
             userName.innerHTML = html;
         })
@@ -37,12 +37,15 @@ const setupExpense = (data) => {
     const li = `
     <tr data-id="${doc.id}">
             <td></td>
-            <td>${expense.date}</td>
-            <td>${expense.food}</td>
-            <td>${expense.transport}</td>
-            <td>${expense.other}</td>
-            <td>${expense.sum}</td>
-            <td><a href="#" class="btn btn-danger btn-sm delete" onclick="del(this)">X</a></td>
+            <td id ="date">${expense.date}</td>
+            <td id ="food">${expense.food}</td>
+            <td id ="transport">${expense.transport}</td>
+            <td id ="other">${expense.other}</td>
+            <td id ="total">${expense.sum}</td>
+            <td>
+            <a href="#" class="btn btn-danger btn-sm delete" onclick="del(this)">X</a>
+            <a href="#" class="btn btn-danger btn-sm delete" onclick="edit(this)">U</a>
+            </td>
         </tr>
     
     `
@@ -58,12 +61,30 @@ const setupExpense = (data) => {
 }
 
 
+//DELETE A ROW
+function del (data) {
+    let id = data.parentElement.parentElement.getAttribute('data-id');
+    ref.doc(id).delete();
+}
 
 
+//UPDATING THE DATA
 
-
-
-
+function edit (data){
+    let id = data.parentElement.parentElement.getAttribute('data-id');
+    console.log(id);
+    currentUserId = id;
+    // const table = document.querySelector('.table');
+    const row = document.querySelector('[data-id='+id+']');
+    // const tabledate = row.querySelector('#food').value;
+    updateForm.style.display = "block";
+    form.style.display = "none";
+    console.log(currentUserId);
+    updateForm.querySelector('#food').value = row.querySelector('#food').innerHTML;
+    updateForm.querySelector('#transport').value = row.querySelector('#transport').innerHTML;
+    updateForm.querySelector('#other').value = row.querySelector('#other').innerHTML;
+    // console.log(row.querySelector('#food').innerHTML);
+}
 
 
 // setup materialize components
