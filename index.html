@@ -8,19 +8,19 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
   <title>My Expenses</title>
 </head>
-<body class="grey lighten-3">
+<body class="#e3f2fd blue lighten-5">
     
-    <nav class="z-depth-0 grey lighten-4">
+    <nav class="#0d47a1 blue darken-4">
         <div class="nav-wrapper container">
           <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li class="logged-in">
-                <a href="#" class="grey-text" id="logout">Logout</a>
+                <a href="#" class="white-text" id="logout">Logout</a>
               </li>
               <li class="logged-out">
-                <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
+                <a href="#" class="white-text modal-trigger" data-target="modal-login">Login</a>
               </li>
               <li class="logged-out">
-                <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
+                <a href="#" class="white-text modal-trigger" data-target="modal-signup">Sign up</a>
               </li>
             </span>
           </ul>
@@ -37,6 +37,10 @@
             <label for="signup-name">Name</label>
         </div>
         <div class="input-field">
+          <input type="text" id="occupation" required />
+          <label for="occupation">Occupation</label>
+        </div>
+        <div class="input-field">
             <input type="email" id="signup-email" required />
             <label for="signup-email">Email address</label>
         </div>
@@ -44,10 +48,7 @@
             <input type="password" id="signup-password" required />
             <label for="signup-password">Choose password</label>
         </div>
-        <!-- <div class="input-field">
-          <input type="text" id="signup-bio" required />
-          <label for="signup-password">Bio</label>
-        </div> -->
+       
         <button class="btn yellow darken-2 z-depth-0">Sign up</button>
         <p class="error pink-text center-align"></p>
       </form>
@@ -76,7 +77,28 @@
   <div class="container-fluid ">
     <div class="row">
       <div class="col s3" style="background: white; height:100%">
+          <div class="profile-img">
+            
+          </div>
           <p class="user-name" style="text-align:center;"></p>
+          <div class="row padding-all">
+              <form id="upload-pic">
+                <div class="file-field input-field" style="padding:10px;">
+                  <div class="btn">
+                    <span>File</span>
+                    <input type="file" id="upload-photo">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+                </div>
+                
+                  
+                <button type="submit">submit</button>
+                  <!-- <input type="submit"> -->
+                
+              </form>
+          </div>
       </div>
       <div class="col s9" style="padding: 40px;">
           <form id="expense-form" class="logged-in">
@@ -156,6 +178,7 @@
 <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.2/firebase-storage.js"></script>
 
 <script>
   // Initialize Firebase
@@ -170,6 +193,7 @@
   firebase.initializeApp(config);
   const db =  firebase.firestore();
   const auth = firebase.auth();
+  const storageRef = firebase.storage().ref('profile-pics/');
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="auth.js"></script>

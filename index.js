@@ -10,7 +10,10 @@ const setupUI = (user) =>{
     if(user){
         db.collection('users').doc(user.uid).get().then(doc =>{
             const html = `
-            <div><h5>Name :  ${doc.data().name}</h5></div>
+            <div>
+            <p><b>Name</b> :  ${doc.data().name}</p>
+            <p><b>Occupation</b> : ${doc.data().occupation}
+            </div>
             `;
             userName.innerHTML = html;
         })
@@ -85,6 +88,13 @@ function edit (data){
     updateForm.querySelector('#other').value = row.querySelector('#other').innerHTML;
     // console.log(row.querySelector('#food').innerHTML);
 }
+
+
+
+
+
+
+
 
 
 // setup materialize components

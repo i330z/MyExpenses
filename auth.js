@@ -10,6 +10,7 @@ auth.onAuthStateChanged(user => {
     
     const userId = user.uid;
     ref = db.collection('/users/' + userId + '/expensedata')
+    refUser = db.collection('users').doc(userId)
         // GET DATA FROM FIREBASE
         ref.orderBy("date").onSnapshot(snapshot =>{
         console.log(snapshot.docs)
@@ -83,7 +84,8 @@ signupForm.addEventListener('submit',(e) =>{
     auth.createUserWithEmailAndPassword(email,password).then(cred => {
         console.log(cred);
         return db.collection('users').doc(cred.user.uid).set({
-            name : signupForm['signup-name'].value
+            name : signupForm['signup-name'].value,
+            occupation : signupForm['occupation'].value
         });    
     })
     .then(() =>{
@@ -166,5 +168,41 @@ updateForm.addEventListener('submit', (e)=>{
         console.log(err)
     })
     
+
+})
+
+
+
+//UPLOAD PROFILE PIC
+
+const uploadForm = document.querySelector('#upload-pic');
+
+var imageUrl = '';
+
+uploadForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const file = document.querySelector('#upload-photo').files[0];
+    const name = file.name;
+    const metadata = {
+        contentType : file.type
+    }
+
+    const task = storageRef.child(name).put(file,metadata);
+    task
+        .then(snapshot =>{
+            return snapshot.ref.getDownloadURL()
+        })
+        .then((url) => {
+            console.log(url)
+            imageUrl = url
+
+            refUser.update({
+                profile_picture : imageUrl
+            })
+        })
+        .then(()=>{
+            alert('image Uploaded')
+        })
+        .catch(err => console.log(err))
 
 })
