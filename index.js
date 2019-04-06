@@ -2,7 +2,7 @@ const expenseList = document.querySelector('#expense-list');
 const logOutLinks = document.querySelectorAll('.logged-out');
 const logInLinks = document.querySelectorAll('.logged-in');
 const userName = document.querySelector('.user-name');
-// const updateForm = document.querySelector('#update-form');
+const profilePic = document.querySelector('#profile-img');
 
 
 //SETUP UI
@@ -16,6 +16,11 @@ const setupUI = (user) =>{
             </div>
             `;
             userName.innerHTML = html;
+
+            const profile = `
+            <img src= ${doc.data().profile_picture} height:"200px" width="200px" style="border-radius: 50%;">
+            `
+            profilePic.innerHTML =profile;
         })
 
         logInLinks.forEach(item => item.style.display = 'block');
